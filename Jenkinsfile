@@ -8,12 +8,15 @@ pipeline{
         choice(name: 'ENVIRONMENT', choices: ['Dev','QA','PROD'])
     }
     stages{
-        stage('First Stage'){
+        stage('Build Stage'){
             steps{
-                 sh "echo Beta"
+                 sh '''
+                 cd vote
+                 docker build .
+                 '''
             }
         }
-        stage('Second Stage'){
+        stage('Deploy Stage'){
             steps{
                 sh "sleep 30" 
             }
